@@ -1,0 +1,77 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.custom.function</groupId>
+	<artifactId>JmeterFunction</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<properties>
+		<sourceEncoding>UTF-8</sourceEncoding>
+		<jmeter.version>4.0</jmeter.version>
+		<java.version>1.8</java.version>
+	</properties>
+
+	<dependencies>
+
+		<dependency><!-- jmeter核心依赖 -->
+			<groupId>org.apache.jmeter</groupId>
+			<artifactId>ApacheJMeter_core</artifactId>
+			<version>${jmeter.version}</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/jar/ApacheJMeter_core.jar</systemPath>
+		</dependency>
+
+		<dependency><!-- jmeter函数依赖 -->
+			<groupId>org.apache.jmeter</groupId>
+			<artifactId>ApacheJMeter_functions</artifactId>
+			<version>${jmeter.version}</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/jar/ApacheJMeter_functions.jar</systemPath>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<encoding>${sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<encoding>${sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>3.0.2</version>
+				<executions>
+					<execution>
+						<id>copy</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>
+								${project.build.directory}/lib</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>
